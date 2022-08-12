@@ -24,7 +24,7 @@ public enum ErrorCode {
     NOTFOUND_USER(404,  "해당 이름의 유저가 존재하지 않습니다."),
 
     // 게시글
-    NOTFOUND_POST(404, "해당 게시글이 존재하지 않습니다."),
+    NOTFOUND_PRODUCT(404, "해당 상품이 존재하지 않습니다."),
     CONVERTING_FAILED(400, "파일 변환에 실패했습니다."),
     ;
     private final String message;

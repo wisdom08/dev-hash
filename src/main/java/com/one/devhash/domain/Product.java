@@ -5,31 +5,31 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @Entity
 @NoArgsConstructor
 public class Product extends Timestamped {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column
 	private Long productId;
 
 	@JsonBackReference
-	private User user;
+//	private User user;
 //	private Image image; 이미지
 
+	@Column
 	private String productTitle;
+	@Column
 	private String productContent;
+	@Column
 	private int productPrice;
 
 	@Builder
-	public Product(User user, String productTitle, String productContent, int productPrice) {
-		this.user = user;
+	public Product(String productTitle, String productContent, int productPrice) { //, User user
+//		this.user = user;
 		this.productTitle = productTitle;
 		this.productContent = productContent;
 		this.productPrice = productPrice;

@@ -1,15 +1,18 @@
 package com.one.devhash.service;
 
 import com.one.devhash.domain.Product;
-import com.one.devhash.domain.User;
+import com.one.devhash.global.error.exception.EntityNotFoundException;
+import com.one.devhash.global.error.exception.ErrorCode;
 import com.one.devhash.repository.ProductRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
+@RequiredArgsConstructor
 public class ProductService {
-	private ProductRepository productRepository;
+	private final ProductRepository productRepository;
 
 	public List<Product> getProductList() {
 		return productRepository.findAllByOrderByCreatedAtAsc();
@@ -17,16 +20,16 @@ public class ProductService {
 
 	public Product getProduct(Long productId) {
 		return productRepository.findByProductId(productId)
-				.orElseThrow(() -> new IllegalArgumentException("상품이 존재하지 않습니다"));
+				.orElseThrow(() -> new EntityNotFoundException(ErrorCode.NOTFOUND_PRODUCT));
 	}
 
-	public Product createProduct(HashMap data, User user) { //, 형태 user
+	public Product createProduct(HashMap data) { //, 형태 user
 		String productTitle = (String) data.get("productTitle");
 		String productContent = (String) data.get("productContent");
-		int productPrice = (int) data.get("productPrice");
+		int productPrice = Integer.parseInt((String) data.get("productPrice"));
 
 		Product product = Product.builder()
-				.user(user)
+//				.user(user)
 				.productTitle(productTitle)
 				.productContent(productContent)
 				.productPrice(productPrice)
