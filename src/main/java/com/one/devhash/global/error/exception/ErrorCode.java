@@ -22,6 +22,9 @@ public enum ErrorCode {
     USERNAME_DUPLICATION(400, "이미 등록된 아이디입니다."),
     LOGIN_INPUT_INVALID(400, "로그인 정보를 다시 확인해주세요."),
     NOTFOUND_USER(404,  "해당 이름의 유저가 존재하지 않습니다."),
+    NOT_VALID_REFRESH_TOKEN(400, "유효한 리프레시 토큰이 아닙니다."),
+    Expired_JWT_EXCEPTION(400, "리프레시토큰이 만료되었습니다."),
+    NOT_EQUAL_REFRESH_TOKEN(400, "해당 리프레시 토큰은 보관된 리프레시 토큰의 정보와 다릅니다."),
 
     // 게시글
     NOTFOUND_PRODUCT(404, "해당 상품이 존재하지 않습니다."),
