@@ -1,5 +1,6 @@
 package com.one.devhash.domain;
 
+import com.one.devhash.dto.product.ProductRequestDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,8 +19,6 @@ public class Product extends Timestamped {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
-//	private Image image; 이미지
-
 	@Column
 	private String productTitle;
 	@Column
@@ -28,21 +27,25 @@ public class Product extends Timestamped {
 	private int productPrice;
 	@Column
 	@Enumerated(EnumType.STRING)
-	private ProductStatus productStatus = ProductStatus.FOR_SALE;
+	private ProductStatus productStatus;
 
 	@Builder
-	public Product(User user, String productTitle, String productContent, int productPrice) { //, User user
+	public Product(User user, String productTitle, String productContent, int productPrice, ProductStatus productStatus) { //, User user
 		this.user = user;
 		this.productTitle = productTitle;
 		this.productContent = productContent;
 		this.productPrice = productPrice;
+		this.productStatus = productStatus;
 	}
 
-	@Builder(builderMethodName = "updateBuilder")
-	public void update(String productTitle, String productContent, int productPrice, ProductStatus productStatus) {
-		this.productTitle = productTitle;
-		this.productContent = productContent;
-		this.productPrice = productPrice;
+	public void update(ProductRequestDto requestDto) {
+		this.productTitle = requestDto.getProductTitle();
+		this.productContent = requestDto.getProductContent();
+		this.productPrice = requestDto.getProductPrice();
+		this.productStatus = requestDto.getProductStatus();
+	}
+
+	public void updateStatus(ProductStatus productStatus) {
 		this.productStatus = productStatus;
 	}
 }

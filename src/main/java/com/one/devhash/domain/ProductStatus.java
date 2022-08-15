@@ -1,7 +1,7 @@
 package com.one.devhash.domain;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 
 @AllArgsConstructor
 public enum ProductStatus {
@@ -12,6 +12,10 @@ public enum ProductStatus {
 	SOLD_OUT("판매완료")
 	;
 
-	@Getter
-	private String des;
+	private String value;
+
+	@JsonValue
+	public String getValue() {
+		return value;
+	}
 }

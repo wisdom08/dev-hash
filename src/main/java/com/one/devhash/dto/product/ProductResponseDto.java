@@ -15,7 +15,7 @@ public class ProductResponseDto {
 	private final String modifiedAt;
 	private Long productId;
 	private String productTitle;
-	private String productcontent;
+	private String productContent;
 	private int productPrice;
 	private ProductStatus productStatus;
 	private Object[] imagefiles;
@@ -25,7 +25,7 @@ public class ProductResponseDto {
 		this.modifiedAt = product.getModifiedAt();
 		this.productId = product.getProductId();
 		this.productTitle = product.getProductTitle();
-		this.productcontent = product.getProductContent();
+		this.productContent = product.getProductContent();
 		this.productPrice = product.getProductPrice();
 		this.productStatus = product.getProductStatus();
 		this.imagefiles = imagefiles.stream()
