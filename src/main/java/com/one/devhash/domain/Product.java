@@ -26,6 +26,9 @@ public class Product extends Timestamped {
 	private String productContent;
 	@Column
 	private int productPrice;
+	@Column
+	@Enumerated(EnumType.STRING)
+	private ProductStatus productStatus = ProductStatus.FOR_SALE;
 
 	@Builder
 	public Product(User user, String productTitle, String productContent, int productPrice) { //, User user
@@ -35,9 +38,11 @@ public class Product extends Timestamped {
 		this.productPrice = productPrice;
 	}
 
-	public void update(String productTitle, String productContent, int productPrice) {
+	@Builder(builderMethodName = "updateBuilder")
+	public void update(String productTitle, String productContent, int productPrice, ProductStatus productStatus) {
 		this.productTitle = productTitle;
 		this.productContent = productContent;
 		this.productPrice = productPrice;
+		this.productStatus = productStatus;
 	}
 }

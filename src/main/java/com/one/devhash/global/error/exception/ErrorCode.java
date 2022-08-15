@@ -28,6 +28,7 @@ public enum ErrorCode {
 
     // 게시글
     NOTFOUND_PRODUCT(404, "해당 상품이 존재하지 않습니다."),
+    UNSUPPORTED_FILE_FORMAT(404, "지원하지 않는 파일 형식입니다."),
     CONVERTING_FAILED(400, "파일 변환에 실패했습니다."),
     ;
     private final String message;
