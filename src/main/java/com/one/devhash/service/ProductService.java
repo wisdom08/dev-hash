@@ -58,8 +58,10 @@ public class ProductService {
 		return ((UserDetails)principal).getUsername();
 	}
 	public Product updateProduct(Long productId, HashMap data, ProductStatus productStatus) {
+		User user = userService.findByUserName(getCurrentUsername());
 		Product product = productRepository.findByProductId(productId)
 				.orElseThrow(() -> new EntityNotFoundException(ErrorCode.NOTFOUND_PRODUCT));
+		if(user != product.getUser()) { throw new EntityNotFoundException(ErrorCode.NOT_AUTHORIZED); }
 		String productTitle = (String) data.get("productTitle");
 		String productContent = (String) data.get("productContent");
 		int productPrice = Integer.parseInt((String) data.get("productPrice"));
@@ -74,6 +76,10 @@ public class ProductService {
 	}
 
 	public void deleteProduct(Long productId) {
+		User user = userService.findByUserName(getCurrentUsername());
+		Product product = productRepository.findByProductId(productId)
+				.orElseThrow(() -> new EntityNotFoundException(ErrorCode.NOTFOUND_PRODUCT));
+		if(user != product.getUser()) { throw new EntityNotFoundException(ErrorCode.NOT_AUTHORIZED); }
 		try {
 			productRepository.deleteById(productId);
 		} catch (EntityNotFoundException e) {
