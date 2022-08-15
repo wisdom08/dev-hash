@@ -1,6 +1,5 @@
 package com.one.devhash.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,8 +15,9 @@ public class Product extends Timestamped {
 	@Column
 	private Long productId;
 
-	@JsonBackReference
-//	private User user;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
+	private User user;
 //	private Image image; 이미지
 
 	@Column
@@ -28,8 +28,8 @@ public class Product extends Timestamped {
 	private int productPrice;
 
 	@Builder
-	public Product(String productTitle, String productContent, int productPrice) { //, User user
-//		this.user = user;
+	public Product(User user, String productTitle, String productContent, int productPrice) { //, User user
+		this.user = user;
 		this.productTitle = productTitle;
 		this.productContent = productContent;
 		this.productPrice = productPrice;
