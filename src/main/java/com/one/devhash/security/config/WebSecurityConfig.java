@@ -48,7 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/chats/**").access("isAuthenticated()")
                 .antMatchers(HttpMethod.PUT,"/api/chats/**").access("isAuthenticated()")
                 .antMatchers(HttpMethod.DELETE,"/api/chats/**").access("isAuthenticated()")
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
 
                 .and()
                 .apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
