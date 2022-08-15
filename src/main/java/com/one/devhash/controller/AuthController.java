@@ -1,12 +1,14 @@
 package com.one.devhash.controller;
 
-import com.one.devhash.dto.user.UserRequestDto;
 import com.one.devhash.dto.user.TokenResponseDto;
+import com.one.devhash.dto.user.UserRequestDto;
 import com.one.devhash.global.response.ApiUtils;
 import com.one.devhash.global.response.CommonResponse;
 import com.one.devhash.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -32,8 +34,13 @@ public class AuthController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/signin")
-    public CommonResponse<TokenResponseDto> signInp(@RequestBody @Valid UserRequestDto userRequestDto) {
-        return ApiUtils.success(200, userService.signIn(userRequestDto));
+    public ResponseEntity<CommonResponse<Object>> signInp(@RequestBody @Valid UserRequestDto userRequestDto) {
+        TokenResponseDto tokenResponseDto = userService.signIn(userRequestDto);
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("accessToken",tokenResponseDto.getAccessToken());
+        responseHeaders.set("refreshToken",tokenResponseDto.getAccessToken());
+
+        return ResponseEntity.ok().headers(responseHeaders).body(ApiUtils.success(200, null));
     }
 
     /**

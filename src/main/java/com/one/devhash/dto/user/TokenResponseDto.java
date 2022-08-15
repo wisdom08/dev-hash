@@ -2,6 +2,7 @@ package com.one.devhash.dto.user;
 
 import lombok.*;
 
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
