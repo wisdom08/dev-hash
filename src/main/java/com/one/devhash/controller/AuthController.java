@@ -49,8 +49,13 @@ public class AuthController {
      * @return TokenResponseDto : Access token 과 Refresh token 모두 재발급해준다.
      */
     @PostMapping("/reissue")
-    public TokenResponseDto reissueToken(@RequestBody Map<String, String> refreshTokenMap){
-       return userService.reissueAccessToken(refreshTokenMap.get("refreshToken"));
+    public ResponseEntity<CommonResponse<Object>> reissueToken(@RequestBody Map<String, String> refreshTokenMap){
+        TokenResponseDto tokenResponseDto = userService.reissueAccessToken(refreshTokenMap.get("refreshToken"));
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("accessToken",tokenResponseDto.getAccessToken());
+        responseHeaders.set("refreshToken",tokenResponseDto.getAccessToken());
+
+        return ResponseEntity.ok().headers(responseHeaders).body(ApiUtils.success(200, null));
     }
 }
 
