@@ -29,7 +29,12 @@ public enum ErrorCode {
     // 게시글
     NOTFOUND_PRODUCT(404, "해당 상품이 존재하지 않습니다."),
     CONVERTING_FAILED(400, "파일 변환에 실패했습니다."),
-    ;
+
+    // 채팅
+    INVALID_REQUEST_FOR_CHAT(400, "다른 유저의 상품글에만 채팅방을 만들 수 있습니다."),
+    DUPLICATED_REQUEST_FOR_CHAT(400, "채팅방이 이미 있습니다."),
+    NOTFOUND_CATTING_ROOM(404,  "채팅방이 존재하지 않습니다."),
+            ;
     private final String message;
     private final int status;
 

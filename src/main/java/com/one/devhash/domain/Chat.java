@@ -1,15 +1,15 @@
 package com.one.devhash.domain;
 
-import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
+import com.one.devhash.utils.AuditingFields;
+import lombok.Getter;
+import lombok.ToString;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @ToString
-public class Chat {
+public class Chat extends AuditingFields {
 
     @Id @GeneratedValue
     @Column(name = "chat_id")
@@ -21,12 +21,7 @@ public class Chat {
 
     private String sender;
 
-    @Column(columnDefinition = "TEXT")
     private String message;
-
-    @CreatedDate
-    @Column(updatable = false)
-    private LocalDateTime createdAt;
 
     protected Chat() {}
 
@@ -34,7 +29,6 @@ public class Chat {
         this.room = room;
         this.sender = sender;
         this.message = message;
-        this.createdAt = LocalDateTime.now();
     }
 
     public static Chat createChat(Room room, String sender, String message) {
