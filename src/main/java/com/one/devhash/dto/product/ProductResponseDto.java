@@ -13,6 +13,7 @@ import java.util.List;
 public class ProductResponseDto {
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private final String modifiedAt;
+	private String userName;
 	private Long productId;
 	private String productTitle;
 	private String productContent;
@@ -23,6 +24,7 @@ public class ProductResponseDto {
 	@Builder
 	public ProductResponseDto(Product product, List<Imagefile> imagefiles) {
 		this.modifiedAt = product.getModifiedAt();
+		this.userName = product.getUser().getUserName();
 		this.productId = product.getProductId();
 		this.productTitle = product.getProductTitle();
 		this.productContent = product.getProductContent();

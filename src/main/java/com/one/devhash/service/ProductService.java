@@ -27,7 +27,7 @@ public class ProductService {
 	private final ImagefileRepository imagefileRepository;
 
 	public List<ProductResponseDto> getProductList(Pageable pageable) {
-		List<Product> products = productRepository.findAllByOrderByCreatedAtAsc(pageable).getContent();
+		List<Product> products = productRepository.findAllByOrderByCreatedAtDesc(pageable).getContent();
 		return products.stream()
 				.map(p -> new ProductResponseDto(p, imagefileRepository.findAllByTargetId(ImageTarget.PRODUCT, p.getProductId())))
 				.toList();

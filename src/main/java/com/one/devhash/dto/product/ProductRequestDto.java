@@ -12,7 +12,7 @@ public class ProductRequestDto {
 	private String productTitle;
 	private String productContent;
 	private int productPrice;
-	private ProductStatus productStatus;
+	private ProductStatus productStatus = ProductStatus.FOR_SALE;
 
 	public Product toProduct(User user) {
 		return Product.builder()
