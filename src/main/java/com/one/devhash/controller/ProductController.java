@@ -1,13 +1,11 @@
 package com.one.devhash.controller;
 
 import com.one.devhash.domain.ImageTarget;
-import com.one.devhash.domain.Imagefile;
 import com.one.devhash.domain.Product;
 import com.one.devhash.domain.ProductStatus;
 import com.one.devhash.dto.product.ProductResponseDto;
 import com.one.devhash.global.response.ApiUtils;
 import com.one.devhash.global.response.CommonResponse;
-import com.one.devhash.repository.ImagefileRepository;
 import com.one.devhash.service.ProductService;
 import com.one.devhash.service.S3Service;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
 
 @RequestMapping("/api/products")
 @RequiredArgsConstructor
@@ -24,7 +23,6 @@ import java.util.*;
 public class ProductController {
 	private final ProductService productService;
 	private final S3Service s3Service;
-	private final ImagefileRepository imagefileRepository;
 
 	// 상품 전체 조회
 	@GetMapping

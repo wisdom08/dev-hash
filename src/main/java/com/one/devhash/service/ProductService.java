@@ -1,10 +1,9 @@
 package com.one.devhash.service;
 
 import com.one.devhash.domain.ImageTarget;
-import com.one.devhash.domain.Imagefile;
 import com.one.devhash.domain.Product;
-import com.one.devhash.domain.User;
 import com.one.devhash.domain.ProductStatus;
+import com.one.devhash.domain.User;
 import com.one.devhash.dto.product.ProductResponseDto;
 import com.one.devhash.global.error.exception.EntityNotFoundException;
 import com.one.devhash.global.error.exception.ErrorCode;
@@ -15,8 +14,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
