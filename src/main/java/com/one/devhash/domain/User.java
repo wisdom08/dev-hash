@@ -33,6 +33,12 @@ public class User extends AuditingFields {
         return new ArrayList<>();
     }
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private final List<Product> products = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private final List<Room> rooms = new ArrayList<>();
+
     @Builder
     public User(String userName, String userPassword) {
         this.userName = userName;

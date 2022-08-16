@@ -102,6 +102,7 @@ public class UserService {
         throw new InvalidValueException(ErrorCode.NOT_VALID_REFRESH_TOKEN);
     }
 
+    @Transactional
     public User findByUserName(String userName) {
         return userRepository.findByUserName(userName).orElseThrow(() -> new EntityNotFoundException(ErrorCode.NOTFOUND_USER));
     }
