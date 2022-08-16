@@ -27,6 +27,7 @@ public class WishService {
 		Product product = productRepository.findByProductId(productId)
 				.orElseThrow(() -> new EntityNotFoundException(ErrorCode.NOTFOUND_PRODUCT));
 		User user = userService.findByUserName(getCurrentUsername());
+		if(user == product.getUser()) { throw new EntityNotFoundException(ErrorCode.WISH_ME); }
 		Optional<Wish> wish = wishRepository.findByUserIdAndProductProductId(user.getId(), productId);
 		if(wish.isEmpty()) {
 			wishRepository.save(new Wish(user, product));

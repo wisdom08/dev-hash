@@ -10,6 +10,7 @@ import com.one.devhash.global.error.exception.EntityNotFoundException;
 import com.one.devhash.global.error.exception.ErrorCode;
 import com.one.devhash.repository.ImagefileRepository;
 import com.one.devhash.repository.ProductRepository;
+import com.one.devhash.repository.WishRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,24 +26,28 @@ public class ProductService {
 	private final ProductRepository productRepository;
 	private final UserService userService;
 	private final ImagefileRepository imagefileRepository;
+	private final WishRepository wishRepository;
 
 	public List<ProductResponseDto> getProductList(Pageable pageable) {
 		List<Product> products = productRepository.findAllByOrderByCreatedAtDesc(pageable).getContent();
 		return products.stream()
-				.map(p -> new ProductResponseDto(p, imagefileRepository.findAllByTargetId(ImageTarget.PRODUCT, p.getProductId())))
+				.map(p -> new ProductResponseDto(p, imagefileRepository.findAllByTargetId(ImageTarget.PRODUCT, p.getProductId()),
+						wishRepository.countByProductProductId(p.getProductId())))
 				.toList();
 	}
 
 	public ProductResponseDto getProduct(Long productId) {
 		Product product = productRepository.findByProductId(productId)
 				.orElseThrow(() -> new EntityNotFoundException(ErrorCode.NOTFOUND_PRODUCT));
-		return new ProductResponseDto(product, imagefileRepository.findAllByTargetId(ImageTarget.PRODUCT, productId));
+		int wishCount = wishRepository.countByProductProductId(productId);
+		return new ProductResponseDto(product, imagefileRepository.findAllByTargetId(ImageTarget.PRODUCT, productId), wishCount);
 	}
 
 	public List<ProductResponseDto> getMypageProduct(Long userId) {
 		List<Product> products = productRepository.findAllByUserId(userId);
 		return products.stream()
-				.map(p -> new ProductResponseDto(p, imagefileRepository.findAllByTargetId(ImageTarget.PRODUCT, p.getProductId())))
+				.map(p -> new ProductResponseDto(p, imagefileRepository.findAllByTargetId(ImageTarget.PRODUCT, p.getProductId()),
+						wishRepository.countByProductProductId(p.getProductId())))
 				.toList();
 	}
 

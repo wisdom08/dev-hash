@@ -19,10 +19,11 @@ public class ProductResponseDto {
 	private String productContent;
 	private int productPrice;
 	private ProductStatus productStatus;
+	private int wishCount;
 	private Object[] imagefiles;
 
 	@Builder
-	public ProductResponseDto(Product product, List<Imagefile> imagefiles) {
+	public ProductResponseDto(Product product, List<Imagefile> imagefiles, int wishCount) {
 		this.modifiedAt = product.getModifiedAt();
 		this.userName = product.getUser().getUserName();
 		this.productId = product.getProductId();
@@ -30,6 +31,7 @@ public class ProductResponseDto {
 		this.productContent = product.getProductContent();
 		this.productPrice = product.getProductPrice();
 		this.productStatus = product.getProductStatus();
+		this.wishCount = wishCount;
 		this.imagefiles = imagefiles.stream()
 				.map(Imagefile::getImageUrl)
 				.toArray();

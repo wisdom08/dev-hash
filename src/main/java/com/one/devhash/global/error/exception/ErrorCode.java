@@ -32,6 +32,7 @@ public enum ErrorCode {
     UNSUPPORTED_FILE_FORMAT(404, "지원하지 않는 파일 형식입니다."),
     CONVERTING_FAILED(400, "파일 변환에 실패했습니다."),
     WISH_FAILED(400, "예기치 못한 오류가 발생했습니다."),
+    WISH_ME(400, "자신의 상품은 찜할 수 없습니다."),
 
     // 채팅
     INVALID_REQUEST_FOR_CHAT(400, "다른 유저의 상품글에만 채팅방을 만들 수 있습니다."),

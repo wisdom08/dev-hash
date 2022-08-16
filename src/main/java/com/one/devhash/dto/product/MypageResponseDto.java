@@ -1,4 +1,4 @@
-package com.one.devhash.dto.user;
+package com.one.devhash.dto.product;
 
 import com.one.devhash.domain.User;
 import com.one.devhash.dto.product.ProductResponseDto;
@@ -8,15 +8,17 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class UserResponseDto {
+public class MypageResponseDto {
 	private Long userId;
 	private String userName;
 	private List<ProductResponseDto> products;
+	private List<ProductResponseDto> wishProducts;
 
 	@Builder
-	public UserResponseDto(User user, List<ProductResponseDto> products) {
+	public MypageResponseDto(User user, List<ProductResponseDto> products, List<ProductResponseDto> wishProducts) {
 		this.userId = user.getId();
 		this.userName = user.getUserName();
 		this.products = products;
+		this.wishProducts = wishProducts;
 	}
 }
