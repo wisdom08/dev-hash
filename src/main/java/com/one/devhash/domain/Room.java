@@ -10,8 +10,7 @@ import java.util.List;
 @Entity
 @Getter
 public class Room extends AuditingFields {
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "room_id")
     private Long id;
 
