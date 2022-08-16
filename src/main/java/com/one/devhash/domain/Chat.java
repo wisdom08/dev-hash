@@ -11,7 +11,7 @@ import javax.persistence.*;
 @ToString
 public class Chat extends AuditingFields {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "chat_id")
     private Long id;
 
