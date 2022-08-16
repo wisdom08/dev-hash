@@ -1,5 +1,6 @@
 package com.one.devhash.service;
 
+import com.one.devhash.domain.ImageTarget;
 import com.one.devhash.domain.RefreshToken;
 import com.one.devhash.domain.User;
 import com.one.devhash.dto.user.TokenResponseDto;
@@ -13,12 +14,15 @@ import com.one.devhash.security.MyUserDetailsService;
 import com.one.devhash.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @RequiredArgsConstructor
@@ -30,6 +34,8 @@ public class UserService {
     private final JwtTokenProvider jwtTokenProvider;
     private final MyUserDetailsService myUserDetailsService;
     private final RefreshTokenRepository refreshTokenRepository;
+    private final S3Service s3Service;
+    private final AuthenticationManager authenticationManager;
 
     @Transactional
     public Long signUp(UserRequestDto signUpDto){
@@ -105,5 +111,20 @@ public class UserService {
     @Transactional
     public User findByUserName(String userName) {
         return userRepository.findByUserName(userName).orElseThrow(() -> new EntityNotFoundException(ErrorCode.NOTFOUND_USER));
+    }
+
+    @Transactional
+    public void updateUserImage(MultipartFile[] imageFile) {
+        Long foundUserId = findByUserName(getCurrentUsername()).getId();
+        s3Service.deleteFile(ImageTarget.USER, foundUserId);
+        
+        if (imageFile != null) {
+            s3Service.uploadFile(imageFile, String.valueOf(ImageTarget.USER), foundUserId);
+        }
+    }
+
+    private static String getCurrentUsername() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return ((UserDetails) principal).getUsername();
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.Map;
@@ -41,6 +42,12 @@ public class AuthController {
         responseHeaders.set("refreshToken",tokenResponseDto.getAccessToken());
 
         return ResponseEntity.ok().headers(responseHeaders).body(ApiUtils.success(200, null));
+    }
+
+    @PutMapping
+    public CommonResponse<?> updateUserImage(MultipartFile[] imageFile) {
+        userService.updateUserImage(imageFile);
+        return ApiUtils.success(200, null);
     }
 
     /**
