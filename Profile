@@ -1,1 +1,0 @@
-web: java -Dserver.port=$PORT $JAVA_OPTS -Dspring.profiles.active=heroku -jar build/libs/dev-hash-v1.1-plain.jar
