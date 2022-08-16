@@ -24,7 +24,7 @@ public class RoomService {
     private final UserService userService;
 
     public void createRoom(Long productId) {
-        Product product = productService.getProduct(productId);
+        Product product = productService.getAProduct(productId);
         User user = userService.findByUserName(getCurrentUsername());
 
         if (product.getUser().getId().equals(user.getId())) {

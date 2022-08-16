@@ -84,4 +84,9 @@ public class ProductService {
 			throw new EntityNotFoundException(ErrorCode.INVALID_CONTENT);
 		}
 	}
+
+	public Product getAProduct (Long productId) {
+		return productRepository.findByProductId(productId)
+				.orElseThrow(() -> new EntityNotFoundException(ErrorCode.NOTFOUND_PRODUCT));
+	}
 }
