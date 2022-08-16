@@ -33,7 +33,7 @@ public class S3Service {
 	@Value("${cloud.aws.s3.bucket}")
 	private String bucket;
 
-	public void uploadFile(MultipartFile[] files, String directory, Long productId) {
+	public void uploadFile(MultipartFile[] files, String targetDirectory, Long targetId) {
 		ObjectMetadata omd = new ObjectMetadata();
 		for (MultipartFile file : files) {
 			String fileName = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss", Locale.KOREA))
@@ -45,16 +45,16 @@ public class S3Service {
 			omd.setContentLength(file.getSize());
 			omd.setHeader("filename", file.getOriginalFilename());
 			try {
-				amazonS3.putObject(new PutObjectRequest(bucket + "/" + directory,
+				amazonS3.putObject(new PutObjectRequest(bucket + "/" + targetDirectory,
 						fileName, file.getInputStream(), omd)
 						.withCannedAcl(CannedAccessControlList.PublicRead));
 			} catch (IOException e) {
 				throw new EntityNotFoundException(ErrorCode.CONVERTING_FAILED);
 			}
-			String imagePath = amazonS3.getUrl(bucket + "/" + directory, fileName).toString();
+			String imagePath = amazonS3.getUrl(bucket + "/" + targetDirectory, fileName).toString();
 			Imagefile image = Imagefile.builder()
-					.imageTarget(ImageTarget.PRODUCT)
-					.targetId(productId)
+					.imageTarget(ImageTarget.valueOf(targetDirectory))
+					.targetId(targetId)
 					.imageUrl(imagePath)
 					.build();
 			imagefileRepository.save(image);
