@@ -12,7 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Product extends Timestamped {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private Long productId;
 
@@ -30,7 +30,7 @@ public class Product extends Timestamped {
 	private ProductStatus productStatus;
 
 	@Builder
-	public Product(User user, String productTitle, String productContent, int productPrice, ProductStatus productStatus) { //, User user
+	public Product(User user, String productTitle, String productContent, int productPrice, ProductStatus productStatus) {
 		this.user = user;
 		this.productTitle = productTitle;
 		this.productContent = productContent;

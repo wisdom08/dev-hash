@@ -67,6 +67,7 @@ public class ProductController {
 	@DeleteMapping("/{productId}")
 	public CommonResponse<Long> deleteProduct(@PathVariable Long productId) {
 		productService.deleteProduct(productId);
+		s3Service.deleteFile(ImageTarget.PRODUCT, productId);
 		return ApiUtils.success(200, productId);
 	}
 }

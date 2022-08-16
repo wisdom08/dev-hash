@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -58,5 +59,16 @@ public class S3Service {
 					.build();
 			imagefileRepository.save(image);
 		}
+	}
+
+	public void deleteFile(ImageTarget target, Long targetId) {
+		List<Imagefile> imagefiles = imagefileRepository.findAllByTargetId(target, targetId);
+		if(imagefiles.size() != 0) {
+			for (Imagefile imagefile : imagefiles) {
+				String url = imagefile.getImageUrl();
+				amazonS3.deleteObject(bucket, url.split(bucket + "/", 2)[1]);
+			}
+		}
+		imagefileRepository.deleteAllByTargetId(target, targetId);
 	}
 }
