@@ -29,6 +29,7 @@ public class MypageService {
 	private final ImagefileRepository imagefileRepository;
 	private final WishRepository wishRepository;
 
+	@Transactional
 	public MypageResponseDto getMypage() {
 		User user = userService.findByUserName(getCurrentUsername());
 		List<Product> products = user.getProducts();
