@@ -23,7 +23,7 @@
   - Spring Websocket + STOMP
 
 ## API 문서
-https://documenter.getpostman.com/view/11069976/VUjTj2pz#e7c772b8-4a13-47c5-9219-ce673fac176e
+https://dev-hash-project.herokuapp.com/swagger-ui/index.html
 
 ## ERD
 <img width="1174" alt="image" src="https://user-images.githubusercontent.com/61692282/184932454-b9830893-fc7d-44c1-aca2-28a9343b6e44.png">
