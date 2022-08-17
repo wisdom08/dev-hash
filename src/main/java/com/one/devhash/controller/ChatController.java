@@ -6,6 +6,7 @@ import com.one.devhash.dto.chatting.ChatResponseDto;
 import com.one.devhash.global.response.ApiUtils;
 import com.one.devhash.global.response.CommonResponse;
 import com.one.devhash.service.ChatService;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
@@ -35,6 +36,7 @@ public class ChatController {
         return ApiUtils.success(201, chatMessage);
     }
 
+    @ApiOperation(value = "채팅 내역 조회", notes = "채팅방의 채팅 내역을 조회합니다.")
     @GetMapping("/api/chats/{roomId}")
     public @ResponseBody CommonResponse<List<ChatResponseDto>> joinRoom(@PathVariable Long roomId) {
         return ApiUtils.success(201, chatService.findAllChatByRoomId(roomId));
