@@ -44,7 +44,7 @@ public class AuthController {
         responseHeaders.set("accessToken",tokenResponseDto.getAccessToken());
         responseHeaders.set("refreshToken",tokenResponseDto.getAccessToken());
 
-        return ResponseEntity.ok().headers(responseHeaders).body(ApiUtils.success(200, null));
+        return ResponseEntity.ok().headers(responseHeaders).body(ApiUtils.success(200, tokenResponseDto));
     }
 
     @ApiOperation(value = "프로필 이미지 수정")

@@ -18,7 +18,9 @@ public class CorsConfig {
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         config.addExposedHeader("accessToken");
+        config.addExposedHeader("Accesstoken");
         config.addExposedHeader("refreshToken");
+        config.addExposedHeader("Refreshtoken");
         source.registerCorsConfiguration("/api/**", config);
         return new CorsFilter(source);
     }
