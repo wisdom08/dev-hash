@@ -3,6 +3,7 @@ package com.one.devhash.controller;
 import com.one.devhash.global.response.ApiUtils;
 import com.one.devhash.global.response.CommonResponse;
 import com.one.devhash.service.WishService;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class WishController {
 	private final WishService wishService;
 
+	@ApiOperation(value = "찜 추가", notes = "찜 목록에 상품을 추가합니다.")
 	@PostMapping("/api/wish/{productId}")
 	public CommonResponse<?> addWish(@PathVariable Long productId) {
 		wishService.isWish(productId);
