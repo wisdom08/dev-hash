@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,14 +42,23 @@ public class RoomService {
 
     @Transactional
     public List<RoomResponseDto> getRoomList() {
+        List<Room> roomList = new ArrayList<>();
+
         User user = userService.findByUserName(getCurrentUsername());
-        List<Room> rooms = user.getRooms();
-        return rooms.stream().map(v ->
-                new RoomResponseDto(
-                        v.getId(),
-                        v.getProduct().getProductTitle(),
-                        v.getProduct().getUser().getUserName(),
-                        v.getUser().getUserName()))
+
+        List<Product> productList = productService.findAllByUserId(user.getId());
+        for (Product product : productList) {
+
+            roomList = roomRepository.findByProductOrUser(product, user);
+        }
+
+        return roomList.stream()
+                .map(v ->
+                        new RoomResponseDto(
+                                v.getId(),
+                                v.getProduct().getProductTitle(),
+                                v.getProduct().getUser().getUserName(),
+                                v.getUser().getUserName()))
                 .collect(Collectors.toList());
     }
 
