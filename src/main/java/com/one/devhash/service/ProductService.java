@@ -63,6 +63,7 @@ public class ProductService {
 		product.updateStatus(productStatus);
 	}
 
+	@Transactional
 	public void deleteProduct(Long productId) {
 		checkWriter(productId);
 		try {
@@ -80,8 +81,6 @@ public class ProductService {
 		User user = userService.findByUserName(getCurrentUsername());
 		Product product = productRepository.findByProductId(productId)
 				.orElseThrow(() -> new EntityNotFoundException(ErrorCode.NOTFOUND_PRODUCT));
-		System.out.println(user);
-		System.out.println(product.getUser());
 		if(user != product.getUser()) { throw new EntityNotFoundException(ErrorCode.NOT_AUTHORIZED); }
 		return product;
 	}
