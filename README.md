@@ -1,5 +1,5 @@
 # dev-hash
-- 개발자와 관련된 물품을 채팅을 통해 거래합니다. 
+- 개발자 관련 물품을 개인 간 채팅을 통해 거래합니다. 
 - [Frontend Repository](https://github.com/youngdong82/dev-hash)
 
 ## 팀 프로젝트
@@ -30,7 +30,7 @@ https://dev-hash-project.herokuapp.com/swagger-ui/index.html
 <img width="1174" alt="image" src="https://user-images.githubusercontent.com/61692282/184932454-b9830893-fc7d-44c1-aca2-28a9343b6e44.png">
 
 
-## 배포
+## 백엔드 배포
 https://dev-hash-project.herokuapp.com/
 - Heroku
 
