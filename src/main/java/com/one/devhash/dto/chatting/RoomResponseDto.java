@@ -8,18 +8,16 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class RoomResponseDto {
-    private Long id;
+    private Long roodId;
     private String productTitle;
-    private String userName;
+    private String me;
+    private String sender;
 
-    public RoomResponseDto(Long id, String productTitle, String userName) {
-        this.id = id;
+    public RoomResponseDto(Long roodId, String productTitle, String me, String sender) {
+        this.roodId = roodId;
         this.productTitle = productTitle;
-        this.userName = userName;
-    }
-
-    public static void of(Long id, String productTitle, String userName) {
-        new RoomResponseDto(id, productTitle, userName);
+        this.me = me;
+        this.sender = sender;
     }
 }
 

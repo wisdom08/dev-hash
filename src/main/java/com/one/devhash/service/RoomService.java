@@ -23,7 +23,7 @@ public class RoomService {
     private final ProductService productService;
     private final UserService userService;
 
-    public void createRoom(Long productId) {
+    public Long createRoom(Long productId) {
         Product product = productService.getAProduct(productId);
         User user = userService.findByUserName(getCurrentUsername());
 
@@ -35,14 +35,21 @@ public class RoomService {
             throw new InvalidValueException(ErrorCode.DUPLICATED_REQUEST_FOR_CHAT);
         }
 
-        roomRepository.save(Room.createRoom(product, user));
+        Room savedRoom = roomRepository.save(Room.createRoom(product, user));
+        return savedRoom.getId();
     }
 
     @Transactional
     public List<RoomResponseDto> getRoomList() {
         User user = userService.findByUserName(getCurrentUsername());
         List<Room> rooms = user.getRooms();
-        return rooms.stream().map(v -> new RoomResponseDto(v.getId(), v.getProduct().getProductTitle(), v.getUser().getUserName())).collect(Collectors.toList());
+        return rooms.stream().map(v ->
+                new RoomResponseDto(
+                        v.getId(),
+                        v.getProduct().getProductTitle(),
+                        v.getProduct().getUser().getUserName(),
+                        v.getUser().getUserName()))
+                .collect(Collectors.toList());
     }
 
 
