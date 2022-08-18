@@ -94,4 +94,8 @@ public class ProductService {
 		return productRepository.findByProductId(productId)
 				.orElseThrow(() -> new EntityNotFoundException(ErrorCode.NOTFOUND_PRODUCT));
 	}
+
+	public List<Product> findAllByUserId(Long userId) {
+		return productRepository.findAllByUserId(userId);
+	}
 }
