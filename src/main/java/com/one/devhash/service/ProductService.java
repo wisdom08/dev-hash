@@ -43,14 +43,6 @@ public class ProductService {
 		return new ProductResponseDto(product, imagefileRepository.findAllByTargetId(ImageTarget.PRODUCT, productId), wishCount);
 	}
 
-	public List<ProductResponseDto> getMypageProduct(Long userId) {
-		List<Product> products = productRepository.findAllByUserId(userId);
-		return products.stream()
-				.map(p -> new ProductResponseDto(p, imagefileRepository.findAllByTargetId(ImageTarget.PRODUCT, p.getProductId()),
-						wishRepository.countByProductProductId(p.getProductId())))
-				.toList();
-	}
-
 	public Product createProduct(ProductRequestDto requestDto) {
 		checkContent(requestDto);
 		User user = userService.findByUserName(getCurrentUsername());
@@ -88,6 +80,8 @@ public class ProductService {
 		User user = userService.findByUserName(getCurrentUsername());
 		Product product = productRepository.findByProductId(productId)
 				.orElseThrow(() -> new EntityNotFoundException(ErrorCode.NOTFOUND_PRODUCT));
+		System.out.println(user);
+		System.out.println(product.getUser());
 		if(user != product.getUser()) { throw new EntityNotFoundException(ErrorCode.NOT_AUTHORIZED); }
 		return product;
 	}
