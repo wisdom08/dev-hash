@@ -14,11 +14,12 @@
 ## 기능
 - 인증
   - Spring Security + JWT(ACCESS TOKEN, REFRESH TOKEN)
+- 마이페이지
 - 상품글 CRUD
 - 상품글 찜하기
 - AWS S3 업로드
-  - 상품 이미지
-  - 프로필 이미지 
+  - 상품 이미지(다중)
+  - 프로필 이미지(단일)
 - 채팅
   - Spring Websocket + STOMP
 
@@ -31,7 +32,6 @@ https://dev-hash-project.herokuapp.com/swagger-ui/index.html
 
 ## 배포
 https://dev-hash-project.herokuapp.com/
-- Github actions
 - Heroku
 
 ## 개발 환경
