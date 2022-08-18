@@ -38,7 +38,7 @@ public class MypageService {
 						wishRepository.countByProductProductId(p.getProductId())))
 				.collect(Collectors.toList());
 		List<ProductResponseDto> wishProducts = wishRepository.findAllByUserId(user.getId()).stream()
-				.map(w -> productRepository.findByProductId(w.getWishId())
+				.map(w -> productRepository.findByProductId(w.getProduct().getProductId())
 						.orElseThrow(() -> new EntityNotFoundException(ErrorCode.NOTFOUND_PRODUCT)))
 				.map(p -> new ProductResponseDto(p, imagefileRepository.findAllByTargetId(ImageTarget.PRODUCT, p.getProductId()),
 						wishRepository.countByProductProductId(p.getProductId())))

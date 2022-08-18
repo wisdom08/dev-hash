@@ -42,7 +42,7 @@ public class ProductController {
 	@ApiOperation(value = "상품 등록")
 	@PostMapping
 	@Transactional
-	public CommonResponse<?> createProduct(ProductRequestDto requestDto, MultipartFile[] productImage) {
+	public CommonResponse<?> createProduct(ProductRequestDto requestDto, @RequestPart MultipartFile[] productImage) {
 		Product product = productService.createProduct(requestDto); //, user
 		if(productImage != null) {
 			s3Service.uploadFile(productImage, String.valueOf(ImageTarget.PRODUCT), product.getProductId());
