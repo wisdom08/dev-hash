@@ -20,8 +20,7 @@ public class RoomController {
     @ApiOperation(value = "채팅방 생성")
     @PostMapping("/{productId}")
     public CommonResponse<?> createRoom(@PathVariable Long productId) {
-        roomService.createRoom(productId);
-        return ApiUtils.success(201, null);
+        return ApiUtils.success(201, roomService.createRoom(productId));
     }
 
     @ApiOperation(value = "모든 채팅방 조회", notes = "내 채팅방 목록을 조회합니다.")
