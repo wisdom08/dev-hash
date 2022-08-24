@@ -11,13 +11,8 @@
 - 개발 기간
   - 2022.08.12 ~ 2022.08.18
 
-## 내가 구현한 기능
-- 인증
-- 프로필 사진 등록, 수정, 삭제
-- 채팅
-- 헤로쿠 배포
-
 ## 전체 기능
+> 구현한 기능에 대한 좀 더 상세한 내용은 [이슈 탭](https://github.com/wisdom08/dev-hash/issues)을 확인해주세요.
 - 인증
   - Spring Security + JWT(ACCESS TOKEN, REFRESH TOKEN)
 - 마이페이지
