@@ -32,8 +32,8 @@ https://dev-hash-project.herokuapp.com/swagger-ui/index.html
 
 
 ## 백엔드 배포
-https://dev-hash-project.herokuapp.com/
-- Heroku
+~~https://dev-hash-project.herokuapp.com/~~
+- 비용 문제로 서버는 2022년 11월 5일에 내렸습니다.
 
 ## 개발 환경
 - Intellij IDEA Ultimate
